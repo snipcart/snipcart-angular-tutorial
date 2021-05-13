@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'snipcart-angular';
+  title = 'Infinite summer ice cream store';
+  subtitle = 'Which one do you want?';
 }
