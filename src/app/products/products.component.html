@@ -1,4 +1,3 @@
 <ul>
-    <li *ngFor="let product of products">{{product.name}}</li>
+    <app-product *ngFor="let p of products" [product]="p"></app-product>
 </ul>
-
