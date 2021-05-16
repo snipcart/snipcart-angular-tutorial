@@ -1,0 +1,16 @@
+<h1>{{ product?.name }}</h1>
+<img [src]="imageUrl" />
+<p>Price: {{ product?.price }}</p>
+<mat-form-field>
+  <mat-label>Size</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let size of product?.sizes" [value]="size">
+      {{ size }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<!-- refactor above and below to separate nested components-->
+<mat-carousel>
+    <img *ngFor="let flavor of product?.flavors" src="flavor" />
+</mat-carousel>
+<button>Buy</button>

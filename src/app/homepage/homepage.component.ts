@@ -6,6 +6,6 @@ import { Component, Input} from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent {
-  @Input() title: string | undefined;
-  @Input() subtitle: string | undefined;
+  title = 'Infinite summer ice cream store';
+  subtitle = 'Which one do you want?';
   }

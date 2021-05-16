@@ -3,7 +3,7 @@ import { Size } from './core/size';
 
 export const PRODUCTS: Product[] = [
   {
-    id: 11,
+    id: 1,
     name: 'Ice Cream',
     imageUrls: ['/test.png', '/test2.png', '/test3.png'],
     price: 10,
@@ -11,7 +11,7 @@ export const PRODUCTS: Product[] = [
     sizes: [Size.SMALL, Size.MEDIUM, Size.LARGE]
   },
   {
-    id: 12,
+    id: 2,
     name: 'Popsicle',
     imageUrls: ['/test.png', '/test2.png', '/test3.png'],
     price: 8,
