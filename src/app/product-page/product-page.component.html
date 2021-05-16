@@ -10,7 +10,23 @@
   </mat-select>
 </mat-form-field>
 <!-- refactor above and below to separate nested components-->
-<mat-carousel>
-    <img *ngFor="let flavor of product?.flavors" src="flavor" />
-</mat-carousel>
-<button>Buy</button>
+<p>carousel</p>
+<mat-chip-list aria-label="Flavors selection">
+  <mat-chip
+    *ngFor="let flavor of product?.flavors"
+    [style.background-color]="flavor.color"
+    (click)="setImageUrl(flavor)"
+  >
+    {{ flavor.name }}
+  </mat-chip>
+</mat-chip-list>
+<button class="snipcart-add-item"
+  [attr.data-item-id]="product?.id"
+  [attr.data-item-price]="product?.price"
+  [attr.data-item-url]="'product/' + product?.id"
+  [attr.data-item-image]="imageUrl"
+  [attr.data-item-name]="product?.name"
+  data-item-custom1-name="Size"
+  [attr.data-item-custom1-options]="flavorOptions">
+  Add to cart
+</button>

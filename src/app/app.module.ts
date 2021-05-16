@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCarouselModule } from '@ngbmodule/material-carousel';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
@@ -25,7 +25,7 @@ import { TestComponent } from './test/test.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatCarouselModule.forRoot(),
+    MatChipsModule,
     MatSelectModule,
   ],
   providers: [],

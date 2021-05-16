@@ -228,8 +228,7 @@ getProduct(id: number): Observable<Product | undefined> {
   }
 ```
 TODO talk about rxjs ??
-### upload carousel
-### add Snipcart product details
+### install/add Snipcart product details
 - usual
 - size[product options with price variant]
 - flavors[product options with price variant]
