@@ -1,32 +1,48 @@
 <h1>{{ product?.name }}</h1>
 <img [src]="imageUrl" />
 <p>Price: {{ product?.price }}</p>
-<mat-form-field>
+<mat-form-field appearance="fill">
   <mat-label>Size</mat-label>
-  <mat-select>
+  <mat-select
+    (selectionChange)="
+      updateSelectedProductAttributes(
+        this.selectedAttributes?.flavor,
+        $event.value
+      )
+    "
+    required
+  >
     <mat-option *ngFor="let size of product?.sizes" [value]="size">
       {{ size }}
     </mat-option>
   </mat-select>
 </mat-form-field>
-<!-- refactor above and below to separate nested components-->
-<p>carousel</p>
 <mat-chip-list aria-label="Flavors selection">
   <mat-chip
     *ngFor="let flavor of product?.flavors"
     [style.background-color]="flavor.color"
-    (click)="setImageUrl(flavor)"
+    (click)="
+      updateSelectedProductAttributes(flavor, this.selectedAttributes?.size)
+    "
   >
     {{ flavor.name }}
   </mat-chip>
 </mat-chip-list>
-<button class="snipcart-add-item"
+<button
+  mat-raised-button
+  color="primary"
+  class="snipcart-add-item"
   [attr.data-item-id]="product?.id"
   [attr.data-item-price]="product?.price"
   [attr.data-item-url]="'product/' + product?.id"
   [attr.data-item-image]="imageUrl"
   [attr.data-item-name]="product?.name"
-  data-item-custom1-name="Size"
-  [attr.data-item-custom1-options]="flavorOptions">
+  data-item-custom1-name="Flavor"
+  [attr.data-item-custom1-options]="flavorOptions"
+  [attr.data-item-custom1-value]="this.selectedAttributes?.flavor?.name"
+  data-item-custom2-name="Size"
+  [attr.data-item-custom2-options]="sizeOptions"
+  [attr.data-item-custom2-value]="this.selectedAttributes?.size"
+>
   Add to cart
 </button>

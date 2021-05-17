@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Flavor } from '../core/flavor';
 import { Product } from '../core/product';
+import { SelectedProductAttributes } from '../core/selectedProductAttributes';
+import { Size } from '../core/size';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -10,7 +12,11 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-page.component.scss'],
 })
 export class ProductPageComponent implements OnInit {
-  imageUrl: string = "";
+  imageUrl: string = '';
+  selectedAttributes: SelectedProductAttributes = {
+    flavor: undefined,
+    size: undefined,
+  };
   product: Product | undefined;
 
   constructor(
@@ -26,23 +32,50 @@ export class ProductPageComponent implements OnInit {
   }
 
   get flavorOptions(): string {
-    return this.product?.flavors?.map(flavor => flavor.name).join("|") ?? "yolii";
+    return (
+      this.product?.flavors?.map((flavor) => flavor.name).join('|') ?? 'yolii'
+    );
   }
 
   get sizeOptions(): string {
-    return this.product?.sizes?.join("|") ?? "yolii";
+    return this.product?.sizes?.join('|') ?? 'yolii';
   }
 
   setImageUrl(flavor: Flavor): void {
-    const flavorImageUrl = this.product?.imageUrls.find(url => url.includes(flavor.name));
+    const flavorImageUrl = this.product?.imageUrls.find((url) =>
+      url.includes(flavor.name)
+    );
     if (!flavorImageUrl) {
-      throw Error(`No flavor for ${flavor.name} value`);
+      throw Error(`No flavor for ${flavor.name} value`); // TODO refactor for setter
     }
     this.imageUrl = flavorImageUrl;
   }
 
   ngOnInit() {
     this.getProduct();
-    this.imageUrl = this.product?.imageUrls[0] ?? ''; //TODO refactor code
+    this.setSelectedAttributes(
+      this.product?.flavors[0],
+      this.product?.sizes[0]
+    );
+    if (this.selectedAttributes?.flavor) {
+      this.setImageUrl(this.selectedAttributes.flavor);
+    }
+  }
+
+  public updateSelectedProductAttributes(flavor: Flavor | undefined, size: Size | undefined) {
+    this.setSelectedAttributes(flavor ?? {name: "none", color: "#DDD"}, size ?? Size.SMALL);
+    if (this.selectedAttributes.flavor) {
+      this.setImageUrl(this.selectedAttributes.flavor);
+    }
+  }
+
+  private setSelectedAttributes(
+    flavor: Flavor | undefined,
+    size: Size | undefined
+  ) {
+    this.selectedAttributes = {
+      flavor: flavor,
+      size: size,
+    };
   }
 }

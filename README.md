@@ -234,5 +234,6 @@ TODO talk about rxjs ??
 - flavors[product options with price variant]
 - Snipcart crawler?
 
+TODO talk about flex layou??
 ## Conclusion
 I very much liked Angular modular architecture

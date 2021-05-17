@@ -1,2 +1,4 @@
-<h2>{{product?.name}}</h2>
-<img [src]="imageUrl" />
+<div [routerLink]="'product/' + product?.id">
+  <h2>{{ product?.name }}</h2>
+  <img [src]="imageUrl" />
+</div>
