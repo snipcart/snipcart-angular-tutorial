@@ -42,7 +42,7 @@
       </mat-chip-list>
     </mat-card-content>
     <mat-card-actions fxLayoutAlign="center">
-      <button
+      <!-- <button
         mat-raised-button
         color="primary"
         class="snipcart-add-item"
@@ -59,6 +59,14 @@
         [attr.data-item-custom2-value]="this.selectedAttributes?.size"
       >
         Add to cart
+      </button> -->
+      <button
+        mat-raised-button 
+        color="primary"
+        data-item-id="1"
+        data-item-price="10"
+        data-item-url="/product/1"
+        data-item-name="test product">Add to cart test
       </button>
-    </mat-card-actions>
+    </mat-card-actions> 
   </mat-card>
