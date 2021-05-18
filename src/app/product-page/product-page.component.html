@@ -2,7 +2,9 @@
   <mat-card-title>{{ product?.name }}</mat-card-title>
   <mat-card-subtitle>Price: {{ product?.price }}</mat-card-subtitle>
   <img mat-card-image [src]="imageUrl" />
-  <mat-card-content fxLayout="column" fxLayoutAlign="space-around center">
+  <mat-card-content
+      fxLayout="column"
+      fxLayoutAlign="space-around center">
     <mat-form-field appearance="fill">
       <mat-label>Size</mat-label>
       <mat-select
@@ -19,7 +21,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-chip-list aria-label="Flavors selection">
+    <mat-chip-list
+      aria-label="Flavors selection"
+    >
       <mat-chip
         *ngFor="let flavor of product?.flavors"
         [style.background-color]="flavor.color"
@@ -38,9 +42,15 @@
       class="snipcart-add-item"
       [attr.data-item-id]="product?.id"
       [attr.data-item-price]="product?.price"
-      [attr.data-item-url]="'/product/' + product?.id"
-      [attr.data-item-image]=""
+      [attr.data-item-url]="'/product/' + product?.id + '?flavor=' + selectedAttributes.flavor?.name + '&size=' + selectedAttributes.size"
+      [attr.data-item-image]="imageUrl"
       [attr.data-item-name]="product?.name"
+      data-item-custom1-name="Flavor"
+      [attr.data-item-custom1-options]="flavorOptions"
+      [attr.data-item-custom1-value]="this.selectedAttributes?.flavor?.name"
+      data-item-custom2-name="Size"
+      [attr.data-item-custom2-options]="sizeOptions"
+      [attr.data-item-custom2-value]="this.selectedAttributes?.size"
     >
       Add to cart
     </button>
