@@ -1,9 +1,18 @@
+
 .product-page-card {
-    background-color: white;
-    color: black;
-  }
-  
-  .product-page-card img {
-    object-fit: contain;
-  }
-  
+  background-color: white;
+  color: black;
+}
+
+.product-page-card-title {
+  display: flex;
+  justify-content: center;
+  font-family: "Pacifico", cursive;
+}
+.product-page-card img {
+  object-fit: contain;
+}
+
+.chip {
+  font-size: 18px;
+}

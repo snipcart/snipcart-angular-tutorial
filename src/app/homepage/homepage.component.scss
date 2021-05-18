@@ -1,3 +1,13 @@
-.header {
+.jumbo {
+    font-family: 'Pacifico', cursive;
+}
+
+@media (min-width: 900px) {
+  .header {
     padding: 4em 0;
+  }
+
+  .jumbo {
+    font-size: 48px;
+  }
 }

@@ -1,5 +1,5 @@
 <mat-card class="product-page-card">
-  <mat-card-title>{{ product?.name }}</mat-card-title>
+  <mat-card-title class="product-page-card-title" fxLayout="row" fxAlign="center">  {{ product?.name }}</mat-card-title>
   <mat-card-subtitle>Price: {{ product?.price }}</mat-card-subtitle>
   <img mat-card-image [src]="imageUrl" />
   <mat-card-content
@@ -26,6 +26,7 @@
     >
       <mat-chip
         *ngFor="let flavor of product?.flavors"
+        class="chip mat-elevation-6"
         [style.background-color]="flavor.color"
         (click)="
           updateSelectedProductAttributes(flavor, this.selectedAttributes?.size)
