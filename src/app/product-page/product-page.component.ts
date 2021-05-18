@@ -53,9 +53,14 @@ export class ProductPageComponent implements OnInit {
 
   ngOnInit() {
     this.getProduct();
+
+    const flavorParam = this.route.snapshot.queryParamMap.get('flavor');
+    const flavor = this.product?.flavors.find(flv => flv.name === flavorParam);
+    const sizeParam = this.route.snapshot.queryParamMap.get('size');
+    const size = sizeParam as Size;
     this.setSelectedAttributes(
-      this.product?.flavors[0],
-      this.product?.sizes[0]
+      flavor ?? this.product?.flavors[0],
+      size ?? this.product?.sizes[0]
     );
     if (this.selectedAttributes?.flavor) {
       this.setImageUrl(this.selectedAttributes.flavor);
