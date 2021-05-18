@@ -4,5 +4,5 @@
 $custom-typography: mat-typography-config($font-family: '"Raleway", sans-serif;');
 @include mat-core($custom-typography);
 
-html, body { height: 100%; }
+html, body { height: 100%; background-color: #FDF6EB}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

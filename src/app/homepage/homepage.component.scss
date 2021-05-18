@@ -1,8 +1,17 @@
+h2 {
+    padding: 0.5em 0;
+}
+
 .jumbo {
     font-family: 'Pacifico', cursive;
 }
 
 @media (min-width: 900px) {
+    h2 {
+        font-size: 26px;
+        padding: 0.5em 0;
+    }
+    
   .header {
     padding: 4em 0;
   }

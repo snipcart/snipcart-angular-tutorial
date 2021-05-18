@@ -1,18 +1,32 @@
-
-.product-page-card {
-  background-color: white;
-  color: black;
-}
-
 .product-page-card-title {
   display: flex;
   justify-content: center;
   font-family: "Pacifico", cursive;
+  padding: 1em 0;
 }
+
+.product-page-card {
+    margin-top: 6em;
+}
+
 .product-page-card img {
   object-fit: contain;
+  max-height: 260px;
 }
 
 .chip {
   font-size: 18px;
+  color: #FDF6EB;
+}
+
+
+@media (min-width: 900px) {
+  .product-page-card img {
+    object-fit: contain;
+  }
+
+  .chip:hover {
+    cursor: pointer;
+}
+
 }

@@ -1,11 +1,16 @@
 .product-card {
-  background-color: white;
+  background-color: #FDF6EB;
   color: black;
   font-family: 'Pacifico', cursive;
   height: 100%;
   width: 80%;
 }
 
-.product-card img {
+.product-card:hover {
+   cursor: pointer;
+}
+
+.mat-card-image {
   object-fit: contain;
+  max-height: 290px;
 }
