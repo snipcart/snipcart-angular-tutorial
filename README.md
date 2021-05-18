@@ -227,13 +227,182 @@ getProduct(id: number): Observable<Product | undefined> {
    return of(product);
   }
 ```
-TODO talk about rxjs ??
-### install/add Snipcart product details
-- usual
-- size[product options with price variant]
-- flavors[product options with price variant]
-- Snipcart crawler?
+This method returns an [observable](https://angular.io/guide/observables) which are used in angular for event handling and, as in our case, asynchronous programming. Later when designing our product page, we will see how to fetch observable values.
+
+Lt's use this method in our product component to display the product content: `ng generate component product`.
+
+
+```ts
+// product.component.ts
+import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../core/product';
+
+@Component({
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
+})
+export class ProductComponent implements OnInit {
+  @Input() product: Product | undefined;
+  imageUrl :string = "";
+  
+  ngOnInit() {
+   this.imageUrl = this.product?.imageUrls[0] ?? '';
+  }
+}
+```
+In typescript, we added a product input property for the inserted product, along with an `imageUrl` property, which we bind to the component's image src.
+
+```html
+<div [routerLink]="'product/' + product?.id">
+  <h2>{{ product?.name }}</h2>
+  <img [src]="imageUrl" />
+</div>
+```
+
+In the html, we also added a router link to a product page, which we have not yet defined. Let's do it now.
+### Add product page
+
+First, let's allow our users to select the flavor and size variant they want for their products.
+
+Along with an imageUrl property similar to the one we added to the product component, let's add a `getProduct` method that will get the dynamic parameter from our route and use it to call the corresponding method we defined in product service:
+
+```ts
+// in product-page.component.ts
+ imageUrl: string = '';
+ product: Product | undefined;
+
+ getProduct(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.productService
+      .getProduct(id)
+      .subscribe((product) => (this.product = product));
+  }
+```
+
+TODO talk about imageUrl setting logic
+
+We can see that the method calls our product service `getProduct` method and *subscribes* to the observable value. When the value from getProduct will be returned, we programmed it to be assigned to the product-page component `product` property.
+
+Now that we have we can display our product name, image url and price: 
+
+```html
+<h1>{{ product?.name }}</h1>
+<img [src]="imageUrl" />
+<p>Price: {{ product?.price }}</p>)
+ ```
+
+```html
+<h1>{{ product?.name }}</h1>
+<img [src]="imageUrl" />
+<p>Price: {{ product?.price }}</p>
+<button
+  class="snipcart-add-item"
+  [attr.data-item-id]="product?.id"
+  [attr.data-item-price]="product?.price" 
+  [attr.data-item-url]="'product/' + product?.id"
+  [attr.data-item-image]="imageUrl"
+  [attr.data-item-name]="product?.name">
+  Add to cart
+  </button>
+
+```
+
+#### Customizing customer consumptions with CartSnip's custom field
+If you look at the code repo, you will see I added some logic to create Snipcart's [custom fields](https://docs.snipcart.com/v3/setup/products). These will allow our users to select their ice-cream/popsicles flavor and sizes.
+
+First, I made 2 functions to give us the options separated by `|` caracter, that we will use to populate the buy button's custom option fields.
+
+```ts
+TODO add getters
+```
+
+Then, I added a dropdown to select product size and chip components to select flavors...
+
+```html
+// product-page.component.html
+<mat-form-field appearance="fill">
+  <mat-label>Size</mat-label>
+  <mat-select
+    (selectionChange)="
+      updateSelectedProductAttributes(
+        this.selectedAttributes?.flavor,
+        $event.value
+      )
+    "
+    required
+  >
+    <mat-option *ngFor="let size of product?.sizes" [value]="size">
+      {{ size }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-chip-list aria-label="Flavors selection">
+  <mat-chip
+    *ngFor="let flavor of product?.flavors"
+    [style.background-color]="flavor.color"
+    (click)="
+      updateSelectedProductAttributes(flavor, this.selectedAttributes?.size)
+    "
+  >
+    {{ flavor.name }}
+  </mat-chip>
+</mat-chip-list>
+```
+..., along with some logic to keep track of the selected values:
+
+```ts
+// core/selectedProductAttributes.ts
+
+import { Flavor } from "./flavor";
+import { Size } from "./size";
+
+export interface SelectedProductAttributes {
+    flavor: Flavor | undefined;
+    size: Size | undefined;
+}
+```
+```ts
+// product-page.component.ts
+// (...)
+export class ProductPageComponent implements OnInit {
+  imageUrl: string = '';
+  selectedAttributes: SelectedProductAttributes = {
+    flavor: undefined,
+    size: undefined,
+  };
+  product: Product | undefined;
+// (...)
+```
+
+
+
+Now we simply have to add the to Snipcart's buy button:
+
+```html
+<button
+  class="snipcart-add-item"
+  [attr.data-item-id]="product?.id"
+  [attr.data-item-price]="product?.price" 
+  [attr.data-item-url]="'product/' + product?.id"
+  [attr.data-item-image]="imageUrl"
+  [attr.data-item-name]="product?.name"
+  
+
+  data-item-custom1-name="Flavor"
+  [attr.data-item-custom1-options]="flavorOptions"
+  [attr.data-item-custom1-value]="this.selectedAttributes?.flavor?.name"
+  data-item-custom2-name="Size"
+  [attr.data-item-custom2-options]="sizeOptions"
+  [attr.data-item-custom2-value]="this.selectedAttributes?.size"
+>Add to cart</button>
+```
+You could go a step further and add to get [price modifiers](https://docs.snipcart.com/v3/setup/products)
 
 TODO talk about flex layou??
+
+## Connecting it all through the router
+
+## Using InMemoryDbService
 ## Conclusion
 I very much liked Angular modular architecture
