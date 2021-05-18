@@ -1,4 +1,4 @@
-<div [routerLink]="'product/' + product?.id">
-  <h2>{{ product?.name }}</h2>
-  <img [src]="imageUrl" />
-</div>
+<mat-card class="product-card" [routerLink]="'product/' + product?.id">
+  <mat-card-title>{{ product?.name }}</mat-card-title>
+  <img mat-card-image [src]="imageUrl" />
+</mat-card>

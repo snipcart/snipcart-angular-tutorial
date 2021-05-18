@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
@@ -31,6 +32,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatCardModule,
     MatChipsModule,
     MatIconModule,
     MatSelectModule,

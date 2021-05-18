@@ -38,7 +38,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   get sizeOptions(): string {
-    return this.product?.sizes?.join('|') ?? 'yolii';
+    return this.product?.sizes?.join('|') ?? 'yolii'; //TODO change default to ""
   }
 
   setImageUrl(flavor: Flavor): void {
