@@ -5,19 +5,6 @@ import { PRODUCTS } from '../../src/app/mock-products';
 const findProduct = (id: number): Product | undefined =>
   PRODUCTS.find((product) => product.id === id);
 
-const getFlavorOptions = (product: Product | undefined): string => {
-  return product?.flavors?.map((flavor) => flavor.name).join('|') ?? 'yolii';
-};
-
-const getSizeOptions = (product: Product | undefined): string => {
-  return product?.sizes?.join('|') ?? 'yolii'; //TODO change default to ""
-};
-
-const findFlavorImageUrl = (
-  product: Product | undefined,
-  flavorName: string
-): string | undefined => product?.imageUrls.find((url) => url.includes(flavor.name));
-
 export default function fetchProductInfo(
   req: VercelRequest,
   res: VercelResponse
